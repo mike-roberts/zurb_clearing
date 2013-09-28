@@ -160,18 +160,10 @@ function zurb_clearing_field_formatter_view($entity_type, $entity, $field, $inst
       $item['path'] = $item['uri'];
       $image = array();
 
-      if (isset($settings['image_style_thumb']) && drupal_strlen($settings['image_style_thumb'])) {
+      if (isset($settings['image_style_thumb']) && drupal_strlen($settings['image_style_thumb']) && isset($item[$settings['caption_field']][$langcode])) {
         $item['style_name'] = $settings['image_style_thumb'];
         if ($settings['show_captions'] && isset($item[$settings['caption_field']])) {
-          global $language;
-
-          if (isset($item[$settings['caption_field']][$language->language])) {
-            $language = $language->language;
-          } else {
-            $language = LANGUAGE_NONE;
-          }
-
-          $item['attributes']['data-caption'] = isset($item[$settings['caption_field']][$language][0]['value']) ? $item[$settings['caption_field']][$language][0]['value'] : '';
+          $item['attributes']['data-caption'] = isset($item[$settings['caption_field']][$langcode][0]['value']) ? $item[$settings['caption_field']][$langcode][0]['value'] : '';
         }
         $image['thumbnail'] = theme('image_style', $item);
       }
@@ -189,6 +181,10 @@ function zurb_clearing_field_formatter_view($entity_type, $entity, $field, $inst
       $images[] = $image;
     }
 
+    if ($settings['featured']) {
+      $items[0]['featured'] = TRUE;
+    }
+
     $element[] = array(
       '#theme' => 'zurb_clearing',
       '#items' => $items,
@@ -198,6 +194,7 @@ function zurb_clearing_field_formatter_view($entity_type, $entity, $field, $inst
         'image_style_large' => $settings['image_style_large'],
         'show_captions'     => $settings['show_captions'],
         'caption_field'     => $settings['caption_field'],
+        'featured'          => $settings['featured'],
       ),
       '#entity' => $entity,
     );
