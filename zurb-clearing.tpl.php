@@ -6,9 +6,9 @@
 ?>
 
 <div class="clearing-container">
-  <ul class="clearing-thumbs" data-clearing>
-    <?php foreach ($images as $image) : ?>
-      <li><?php print $image['thumbnail']; ?></li>
+  <ul class="clearing-thumbs<?php if ($options['featured']) : ?> clearing-feature<?php endif; ?>" data-clearing>
+    <?php foreach ($images as $key => $image) : ?>
+      <li<?php if ($key == 0 && $options['featured']) : ?> class="clearing-featured-img"<?php endif; ?>><?php print $image['thumbnail']; ?></li>
     <?php endforeach; ?>
   </ul>
 </div>
