@@ -158,9 +158,16 @@ function zurb_clearing_field_formatter_view($entity_type, $entity, $field, $inst
 
       if (isset($settings['image_style_thumb']) && drupal_strlen($settings['image_style_thumb'])) {
         $item['style_name'] = $settings['image_style_thumb'];
-        if ($settings['show_captions'] && isset($item[$settings['caption_field']]) && isset($item[$settings['caption_field']][LANGUAGE_NONE]) && drupal_strlen($item[$settings['caption_field']][LANGUAGE_NONE][0]['value'])) {
+        if ($settings['show_captions'] && isset($item[$settings['caption_field']])) {
           global $language;
-          $item['attributes']['data-caption'] = $item[$settings['caption_field']][LANGUAGE_NONE][0]['value'];
+
+          if (isset($item[$settings['caption_field']][$language->language])) {
+            $language = $language->language;
+          } else {
+            $language = LANGUAGE_NONE;
+          }
+
+          $item['attributes']['data-caption'] = isset($item[$settings['caption_field']][$language][0]['value']) ? $item[$settings['caption_field']][$language][0]['value'] : '';
         }
         $image['thumbnail'] = theme('image_style', $item);
       }
