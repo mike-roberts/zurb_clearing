@@ -76,14 +76,14 @@ function zurb_clearing_field_formatter_settings_form($field, $instance, $view_mo
   $element['featured'] = array(
     '#title' => t('Feature the first image in the set'),
     '#type' => 'select',
-    '#default_value' => FALSE,
+    '#default_value' => $settings['featured'],
     '#options' => array(FALSE => 'No', TRUE => 'Yes'),
   );
 
   $element['show_captions'] = array(
     '#title' => t('Show captions'),
     '#type' => 'select',
-    '#default_value' => FALSE,
+    '#default_value' => $settings['show_captions'],
     '#options' => array(FALSE => 'No', TRUE => 'Yes'),
   );
 
