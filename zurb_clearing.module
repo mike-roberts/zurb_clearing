@@ -29,8 +29,9 @@ function zurb_clearing_field_formatter_info() {
       'settings'    => array(
         'image_style_thumb' => '',
         'image_style_large' => '',
-        'show_captions' => FALSE,
-        'caption_field' => '',
+        'featured'          => FALSE,
+        'show_captions'     => FALSE,
+        'caption_field'     => '',
       ),
     ),
   );
@@ -70,6 +71,13 @@ function zurb_clearing_field_formatter_settings_form($field, $instance, $view_mo
     '#default_value' => $settings['image_style_large'],
     '#empty_option' => t('None (original image)'),
     '#options' => image_style_options(FALSE),
+  );
+
+  $element['featured'] = array(
+    '#title' => t('Feature the first image in the set'),
+    '#type' => 'select',
+    '#default_value' => FALSE,
+    '#options' => array(FALSE => 'No', TRUE => 'Yes'),
   );
 
   $element['show_captions'] = array(
@@ -124,6 +132,7 @@ function zurb_clearing_field_formatter_settings_summary($field, $instance, $view
     $summary[] = t('Image large style: not selected. Please select an expanded large style.');
   }
 
+  $summary[] = t('Feature the first image: @value', array('@value' => $settings['featured'] ? 'Yes' : 'No'));
   $summary[] = t('Show captions: @value', array('@value' => $settings['show_captions'] ? 'Yes' : 'No'));
   $summary[] = t('Caption field: @value', array('@value' => $settings['caption_field'] ? $settings['caption_field'] : 'not set'));
 
