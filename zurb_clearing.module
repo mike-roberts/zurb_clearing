@@ -110,13 +110,8 @@ function zurb_clearing_field_formatter_settings_form($field, $instance, $view_mo
 function zurb_clearing_field_formatter_settings_summary($field, $instance, $view_mode) {
   $display = $instance['display'][$view_mode];
   $settings = $display['settings'];
-  $image_styles = image_style_options(FALSE);
-  unset($image_styles['']);
-
   $summary = array();
 
-  // Styles could be lost because of enabled/disabled modules that defines
-  // their styles in code.
   if (isset($settings['image_style_thumb'])) {
     $summary[] = t('Image thumbnail style: @value', array('@value' => $settings['image_style_thumb']));
   } else {
@@ -129,8 +124,8 @@ function zurb_clearing_field_formatter_settings_summary($field, $instance, $view
     $summary[] = t('Image large style: not selected. Please select an expanded large style.');
   }
 
-  $summary[] = t('Captions: @value', array('@value' => $settings['show_captions'] ? 'Yes' : 'No'));
-  $summary[] = t('Caption field: @value', array('@value' => $settings['caption_field']));
+  $summary[] = t('Show captions: @value', array('@value' => $settings['show_captions'] ? 'Yes' : 'No'));
+  $summary[] = t('Caption field: @value', array('@value' => $settings['caption_field'] ? $settings['caption_field'] : 'not set'));
 
   return implode('<br />', $summary);
 }
