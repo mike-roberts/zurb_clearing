@@ -1,0 +1,11 @@
+name: ZURB Clearing
+type: module
+description: 'Provides a field formatter to format an image field to leverage the Clearing plugin from ZURB, a responsive image gallery.'
+core: 8.x
+
+dependencies:
+  image
+  libraries
+  media (7.x-2.x-dev)
+
+

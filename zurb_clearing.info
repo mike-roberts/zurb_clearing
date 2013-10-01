@@ -1,7 +1,0 @@
-name = ZURB: Clearing
-description = Provides a field formatter to format an image field to leverage the Clearing plugin from ZURB, a responsive image gallery.
-core = 7.x
-
-dependencies[] = image
-dependencies[] = libraries
-dependencies[] = media (7.x-2.x-dev)
